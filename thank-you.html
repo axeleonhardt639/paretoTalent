@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>You're In — Delegation Master Class with Kasim Aslam</title>
+
+  <!-- Favicon -->
+  <link rel="apple-touch-icon" sizes="180x180" href="favicon_io/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon_io/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon_io/favicon-16x16.png" />
+  <link rel="manifest" href="favicon_io/site.webmanifest" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Jomhuria&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gold:     #FFD24D;
+      --gold-dim: #D4BC80;
+      --bg:       #111317;
+      --bg-card:  #161a20;
+      --bg-card2: #1c2028;
+      --white:    #FFF9E6;
+      --body:     #a0a8b4;
+      --border:   #2a2f3a;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: 'Inter', system-ui, sans-serif;
+      font-size: 17px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    /* ── NAVBAR ── */
+    .navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 80;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 32px;
+      background: rgba(17,19,23,0.88);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,210,77,0.08);
+    }
+    .navbar-logo {
+      font-family: 'Jomhuria', serif;
+      font-size: 30px;
+      color: var(--gold);
+      letter-spacing: 0.02em;
+    }
+    .navbar-logo span {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--body);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-left: 10px;
+    }
+
+    /* ── MAIN LAYOUT ── */
+    .page {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 100px 24px 60px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* radial glow behind card */
+    .page::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 40%, rgba(255,210,77,0.1) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 52px 48px 48px;
+      max-width: 600px;
+      width: 100%;
+      position: relative;
+      text-align: center;
+    }
+
+    /* gold top accent line */
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 48px; right: 48px;
+      height: 2px;
+      background: var(--gold);
+      border-radius: 0 0 2px 2px;
+    }
+
+    /* ── CHECKMARK ── */
+    .check-wrap {
+      width: 72px;
+      height: 72px;
+      margin: 0 auto 28px;
+      background: rgba(255,210,77,0.12);
+      border: 2px solid rgba(255,210,77,0.4);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: popIn 0.5s cubic-bezier(0.34,1.56,0.64,1) both;
+    }
+    .check-wrap svg {
+      width: 32px;
+      height: 32px;
+      stroke: var(--gold);
+      stroke-width: 2.5;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    @keyframes popIn {
+      from { transform: scale(0.5); opacity: 0; }
+      to   { transform: scale(1);   opacity: 1; }
+    }
+
+    /* ── BADGE ── */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255,210,77,0.1);
+      border: 1px solid rgba(255,210,77,0.3);
+      color: var(--gold);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 999px;
+      margin-bottom: 20px;
+    }
+
+    /* ── HEADLINE ── */
+    .headline {
+      font-size: clamp(26px, 4vw, 34px);
+      font-weight: 900;
+      color: var(--white);
+      line-height: 1.2;
+      letter-spacing: -0.03em;
+      margin-bottom: 16px;
+    }
+    .headline span { color: var(--gold); }
+
+    .subtext {
+      font-size: 16px;
+      color: var(--body);
+      line-height: 1.75;
+      margin-bottom: 36px;
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .subtext strong { color: var(--white); }
+
+    /* ── DETAILS CARD ── */
+    .details {
+      background: var(--bg-card2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px 28px;
+      margin-bottom: 32px;
+      text-align: left;
+    }
+    .details-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
+    .detail-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 15px;
+      color: var(--body);
+    }
+    .detail-row:last-child { border-bottom: none; padding-bottom: 0; }
+    .detail-row:first-of-type { padding-top: 0; }
+    .detail-icon { font-size: 18px; flex-shrink: 0; width: 24px; text-align: center; }
+    .detail-row strong { color: var(--white); }
+
+    /* ── NEXT STEPS ── */
+    .steps {
+      background: var(--bg-card2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px 28px;
+      margin-bottom: 32px;
+      text-align: left;
+    }
+    .steps-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
+    .step {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .step:last-child { border-bottom: none; padding-bottom: 0; }
+    .step:first-of-type { padding-top: 0; }
+    .step-num {
+      flex-shrink: 0;
+      width: 26px;
+      height: 26px;
+      background: rgba(255,210,77,0.12);
+      border: 1px solid rgba(255,210,77,0.35);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--gold);
+      margin-top: 2px;
+    }
+    .step-text { font-size: 15px; color: var(--body); line-height: 1.6; }
+    .step-text strong { color: var(--white); display: block; margin-bottom: 2px; }
+
+    /* ── CTA BUTTON ── */
+    .btn-cal {
+      display: inline-block;
+      background: var(--gold);
+      color: #111317;
+      font-family: 'Inter', sans-serif;
+      font-weight: 800;
+      font-size: 16px;
+      padding: 16px 40px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.15s, box-shadow 0.15s;
+      letter-spacing: -0.01em;
+      width: 100%;
+      text-align: center;
+      margin-bottom: 14px;
+    }
+    .btn-cal:hover { transform: translateY(-2px); box-shadow: 0 10px 36px rgba(255,210,77,0.35); }
+
+    .btn-note {
+      font-size: 13px;
+      color: var(--body);
+    }
+
+    /* ── KASIM QUOTE ── */
+    .quote-block {
+      margin-top: 32px;
+      padding: 24px 28px;
+      background: var(--bg-card2);
+      border-left: 3px solid rgba(255,210,77,0.5);
+      border-radius: 0 10px 10px 0;
+      text-align: left;
+    }
+    .quote-text {
+      font-size: 15px;
+      color: var(--body);
+      line-height: 1.75;
+      font-style: italic;
+      margin-bottom: 12px;
+    }
+    .quote-text em { font-style: normal; color: var(--white); font-weight: 700; }
+    .quote-author {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--gold);
+    }
+
+    /* ── FOOTER ── */
+    .footer {
+      border-top: 1px solid var(--border);
+      padding: 24px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 12px;
+      color: var(--body);
+    }
+    .footer-logo {
+      font-family: 'Jomhuria', serif;
+      font-size: 22px;
+      color: var(--gold);
+    }
+
+    /* ── ANIMATIONS ── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      .card { padding: 40px 24px 36px; }
+      .card::before { left: 24px; right: 24px; }
+      .details, .steps { padding: 20px 18px; }
+      .quote-block { padding: 20px 18px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="navbar-logo">3F <span>3× Freedom</span></div>
+  </nav>
+
+  <!-- MAIN -->
+  <main class="page">
+    <div class="card">
+
+      <!-- Checkmark icon -->
+      <div class="check-wrap">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+      </div>
+
+      <!-- Badge -->
+      <div class="badge">&#9733;&nbsp; You're In</div>
+
+      <!-- Headline -->
+      <h1 class="headline">
+        You just did something<br>
+        <span>most people won't.</span>
+      </h1>
+
+      <p class="subtext">
+        Your seat is confirmed for the <strong>Delegation Master Class</strong> with Kasim Aslam.
+        Check your inbox — your confirmation email is on its way.
+      </p>
+
+      <!-- Event details -->
+      <div class="details fade-up">
+        <p class="details-label">Your event details</p>
+        <div class="detail-row">
+          <span class="detail-icon">&#128197;</span>
+          <span><strong>Monday, April 13</strong></span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-icon">&#128336;</span>
+          <span><strong>8PM GMT+3</strong> &nbsp;·&nbsp; 2 hours</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-icon">&#128205;</span>
+          <span>Live on <strong>Zoom</strong> &nbsp;·&nbsp; Link in your confirmation email</span>
+        </div>
+      </div>
+
+      <!-- Next steps -->
+      <div class="steps fade-up">
+        <p class="steps-label">Do these three things right now</p>
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-text">
+            <strong>Add it to your calendar.</strong>
+            Don't wait. The people who forget to add it are the same people who forget to show up.
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-text">
+            <strong>Check your inbox.</strong>
+            Your confirmation email has the Zoom link. If you don't see it, check spam.
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-text">
+            <strong>Come with your hardest problem.</strong>
+            The one you've been sitting on. That's the one Kasim wants.
+          </div>
+        </div>
+      </div>
+
+      <!-- Calendar CTA -->
+      <a href="https://calendar.google.com/calendar/r/eventedit" target="_blank" class="btn-cal">
+        + Add to Calendar Now
+      </a>
+      <p class="btn-note">Seriously. Do it now. We'll wait.</p>
+
+      <!-- Kasim quote -->
+      <div class="quote-block fade-up">
+        <p class="quote-text">
+          "Most people consume. They watch the videos, save the posts, bookmark the frameworks — and never show up.
+          <em>You showed up. That matters.</em>"
+        </p>
+        <p class="quote-author">— Kasim Aslam</p>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <span class="footer-logo">3× Freedom</span>
+    <span>Free to attend &nbsp;·&nbsp; 2 hours &nbsp;·&nbsp; Live on Zoom</span>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          entry.target.style.transitionDelay = (i * 100) + 'ms';
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
