@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free Delegation Webinar with Kasim Aslam</title>
+
+  <!-- Favicon -->
+  <link rel="apple-touch-icon" sizes="180x180" href="favicon_io/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon_io/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon_io/favicon-16x16.png" />
+  <link rel="manifest" href="favicon_io/site.webmanifest" />
+
+  <!-- Fonts: Inter (primary) · Playfair Display (accent) · Jomhuria (logo) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Jomhuria&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* Brand palette: Gold · Charcoal · Warm White */
+    :root {
+      --gold:     #FFD24D;
+      --gold-dim: #D4BC80;
+      --bg:       #111317;
+      --bg-card:  #161a20;
+      --bg-card2: #1c2028;
+      --white:    #FFF9E6;
+      --body:     #a0a8b4;
+      --border:   #2a2f3a;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: 'Inter', system-ui, sans-serif;
+      font-size: 17px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    .container { max-width: 960px; margin: 0 auto; padding: 0 24px; }
+    section { padding: 96px 0; }
+    section + section { border-top: 1px solid var(--border); }
+
+    /* ── NAVBAR ─────────────────────────────────────────── */
+    .navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 80;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 32px;
+      background: rgba(17,19,23,0.88);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,210,77,0.08);
+    }
+    .navbar-logo {
+      font-family: 'Jomhuria', serif;
+      font-size: 30px;
+      color: var(--gold);
+      letter-spacing: 0.02em;
+    }
+    .navbar-logo span {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--body);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-left: 10px;
+    }
+    .navbar-cta {
+      background: var(--gold);
+      color: #111317;
+      font-weight: 700;
+      font-size: 14px;
+      padding: 9px 22px;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .navbar-cta:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(255,210,77,0.35); }
+
+    /* ── BADGE ──────────────────────────────────────────── */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,210,77,0.12);
+      border: 1px solid rgba(255,210,77,0.3);
+      color: var(--gold);
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      padding: 6px 16px;
+      border-radius: 999px;
+      margin-bottom: 28px;
+    }
+    .badge::before { content: '★'; font-size: 12px; }
+
+    /* ── HERO ───────────────────────────────────────────── */
+    #hero {
+      padding: 0;
+      border-top: none;
+      position: relative;
+      overflow: hidden;
+      min-height: 700px;
+    }
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      padding: 120px 0 96px;
+      max-width: 640px;
+    }
+    .hero-headline {
+      font-size: clamp(40px, 6vw, 68px);
+      font-weight: 900;
+      line-height: 1.06;
+      letter-spacing: -0.03em;
+      color: var(--white);
+      margin-bottom: 24px;
+    }
+    .hero-hl-tag {
+      display: block;
+      font-size: clamp(44px, 6.5vw, 80px);
+      font-weight: 800;
+      color: var(--gold);
+      letter-spacing: -0.03em;
+      line-height: 1.0;
+      margin-bottom: 2px;
+    }
+    .hero-hl-mid {
+      display: block;
+      font-size: clamp(36px, 5vw, 62px);
+      font-weight: 900;
+      color: var(--white);
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+    }
+    .hl-gold { color: var(--gold); }
+    .hero-sub {
+      font-size: 18px;
+      color: var(--body);
+      line-height: 1.7;
+      max-width: 520px;
+      margin-bottom: 36px;
+    }
+    .btn-primary {
+      display: inline-block;
+      background: var(--gold);
+      color: #111317;
+      font-weight: 800;
+      font-size: 17px;
+      padding: 16px 36px;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(255,210,77,0.35); }
+    .hero-meta {
+      margin-top: 18px;
+      font-size: 14px;
+      color: var(--body);
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .hero-meta span::before { content: '· '; }
+    .hero-meta span:first-child::before { content: ''; }
+
+    /* Hero photo — right side */
+    .hero-bg-photo {
+      position: absolute;
+      left: 32%;
+      top: 0; right: 0; height: 100%;
+      z-index: 0;
+      background-color: var(--bg);
+      background-image: url('resizeBanner.jpg');
+      background-size: cover;
+      background-position: center top;
+      background-repeat: no-repeat;
+      overflow: hidden;
+    }
+    .hero-bg-photo::before {
+      content: '';
+      position: absolute;
+      right: 5%; top: 38%;
+      transform: translateY(-50%);
+      width: 60%; height: 110%;
+      background: radial-gradient(ellipse at center,
+        rgba(255,210,77,0.18) 0%,
+        rgba(255,185,0,0.08) 30%,
+        transparent 65%);
+      z-index: 0;
+      pointer-events: none;
+    }
+    .hero-bg-photo::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to right,
+          var(--bg) 0%,
+          var(--bg) 5%,
+          rgba(17,19,23,0.95) 20%,
+          rgba(17,19,23,0.7) 35%,
+          rgba(17,19,23,0.2) 52%,
+          rgba(17,19,23,0) 65%,
+          rgba(17,19,23,0.4) 80%,
+          var(--bg) 100%),
+        linear-gradient(to bottom,
+          var(--bg) 0%,
+          rgba(17,19,23,0.5) 15%,
+          rgba(17,19,23,0) 30%,
+          rgba(17,19,23,0) 80%,
+          var(--bg) 100%);
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    /* ── COUNTDOWN ──────────────────────────────────────── */
+    .countdown-wrap {
+      display: flex;
+      gap: 12px;
+      margin-top: 32px;
+      flex-wrap: wrap;
+    }
+    .countdown-unit {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px 20px;
+      text-align: center;
+      min-width: 72px;
+    }
+    .countdown-num {
+      display: block;
+      font-size: 36px;
+      font-weight: 900;
+      color: var(--gold);
+      line-height: 1;
+      font-variant-numeric: tabular-nums;
+    }
+    .countdown-label {
+      display: block;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--body);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-top: 6px;
+    }
+    .countdown-expired { font-size: 17px; font-weight: 700; color: var(--gold); margin-top: 32px; display: none; }
+
+    /* ── EDITORIAL LINES ────────────────────────────────── */
+    .editorial-lines { display: flex; flex-direction: column; border-top: 1px solid var(--border); }
+    .editorial-line {
+      padding: 36px 0;
+      border-bottom: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: 110px 1fr;
+      gap: 28px;
+      align-items: start;
+    }
+    .ed-tag { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--body); padding-top: 8px; }
+    .ed-headline { font-size: clamp(30px, 5vw, 62px); font-weight: 900; color: var(--white); line-height: 1.0; letter-spacing: -0.03em; display: block; }
+    .ed-gold { color: var(--gold); }
+    .ed-thin { font-weight: 300; color: var(--body); }
+    .ed-sub { display: block; font-size: 14px; font-weight: 400; color: var(--body); margin-top: 10px; line-height: 1.65; max-width: 500px; }
+    .editorial-line.ed-closing .ed-headline { color: var(--gold); }
+    @media (max-width: 620px) { .editorial-line { grid-template-columns: 1fr; gap: 6px; } .ed-tag { padding-top: 0; } }
+
+    .problem-cta { margin-top: 52px; display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+    .problem-cta-note { font-size: 14px; color: var(--body); }
+
+    /* ── PROBLEM ────────────────────────────────────────── */
+    #problem { background: var(--bg-card); }
+    .pull-quote { text-align: center; max-width: 860px; margin: 0 auto 64px; }
+    .pull-quote-big { display: block; font-size: clamp(48px, 7.5vw, 92px); font-weight: 900; line-height: 1.0; letter-spacing: -0.03em; color: var(--white); margin-bottom: 20px; }
+    .pull-quote-rest { display: block; font-size: clamp(20px, 3vw, 32px); font-weight: 700; line-height: 1.3; letter-spacing: -0.02em; color: var(--body); }
+
+    .stat-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-bottom: 56px; }
+    .stat-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 32px 24px; text-align: center; }
+    .stat-number { font-size: clamp(56px,8vw,88px); font-weight: 900; color: var(--gold); line-height: 1; display: block; margin-bottom: 8px; }
+    .stat-label { font-size: 15px; color: var(--body); font-weight: 500; }
+
+    /* ── PROMISE — FULL SCREEN ──────────────────────────── */
+    #promise {
+      background: var(--bg);
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    #promise::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 40%,
+        rgba(255,210,77,0.16) 0%,
+        rgba(255,185,0,0.06) 35%,
+        transparent 65%);
+      pointer-events: none;
+    }
+    .promise-inner { position: relative; z-index: 2; padding: 120px 0 80px; }
+    .promise-eyebrow {
+      font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 32px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .promise-eyebrow::after { content: ''; width: 48px; height: 1px; background: var(--gold); opacity: 0.4; }
+    .promise-mega {
+      font-size: clamp(44px, 7.5vw, 96px);
+      font-weight: 900;
+      line-height: 1.0;
+      letter-spacing: -0.04em;
+      color: var(--white);
+      margin-bottom: 48px;
+      max-width: 860px;
+    }
+    .promise-mega em { font-style: normal; color: var(--gold); }
+    .promise-divider { width: 64px; height: 3px; background: var(--gold); margin-bottom: 48px; border-radius: 2px; }
+
+    .section-headline { font-size: clamp(26px,4vw,42px); font-weight: 900; line-height: 1.2; letter-spacing: -0.02em; color: var(--white); margin-bottom: 48px; }
+    .section-headline em { font-style: normal; color: var(--gold); }
+    .serif-accent { font-family: 'Playfair Display', Georgia, serif; font-style: italic; font-weight: 700; color: var(--gold-dim); }
+
+    .outcomes-grid { display: flex; flex-direction: column; gap: 16px; max-width: 760px; }
+    .outcome-card { display: flex; align-items: flex-start; gap: 20px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 24px 28px; transition: border-color 0.2s; }
+    .outcome-card:hover { border-color: rgba(255,210,77,0.4); }
+    .outcome-icon { width: 44px; height: 44px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; margin-top: 2px; }
+    .outcome-icon svg { width: 26px; height: 26px; stroke: var(--gold); stroke-width: 2; fill: none; }
+    .outcome-text strong { display: block; font-size: 17px; font-weight: 700; color: var(--white); margin-bottom: 8px; }
+    .outcome-text p { font-size: 15px; color: var(--body); line-height: 1.6; }
+    .outcome-arrow { display: block; font-size: 15px; font-weight: 600; color: var(--white); line-height: 1.55; margin-top: 12px; padding-left: 14px; border-left: 2px solid var(--gold); }
+    .outcome-closer { display: block; font-size: 13px; color: var(--body); font-style: italic; margin-top: 8px; padding-left: 14px; }
+
+    /* ── ABOUT ──────────────────────────────────────────── */
+    #about { background: var(--bg-card); }
+    .about-label { font-size: 13px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+    .about-name { font-size: clamp(36px,5vw,56px); font-weight: 900; letter-spacing: -0.03em; color: var(--white); margin-bottom: 32px; }
+
+    .video-wrap {
+      width: 100%;
+      aspect-ratio: 16/9;
+      border-radius: 14px 14px 0 0;
+      overflow: hidden;
+      position: relative;
+      background: #000;
+      box-shadow: 0 32px 80px rgba(0,0,0,0.6), 0 0 0 1px var(--border);
+    }
+    .video-wrap iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: none; }
+
+    .about-video-stats {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      border: 1px solid var(--border);
+      border-top: none;
+      border-radius: 0 0 14px 14px;
+      margin-bottom: 40px;
+      background: var(--bg-card2);
+    }
+    .about-video-stat { padding: 28px 20px; text-align: center; border-right: 1px solid var(--border); }
+    .about-video-stat:last-child { border-right: none; }
+    .about-video-stat-num { font-size: clamp(40px,6vw,72px); font-weight: 900; color: var(--gold); line-height: 1; display: block; }
+    .about-video-stat-desc { font-size: 13px; color: var(--body); margin-top: 6px; line-height: 1.4; }
+
+    .about-bio { font-size: 18px; color: var(--body); line-height: 1.75; max-width: 760px; margin-bottom: 20px; }
+    .about-cta-line { font-size: 20px; font-weight: 600; font-style: italic; color: var(--gold); }
+
+    /* ── WHO IT'S FOR ───────────────────────────────────── */
+    #who { background: var(--bg); }
+    .who-grid { display: flex; flex-direction: column; gap: 16px; }
+    .who-item { display: flex; align-items: flex-start; gap: 16px; padding: 20px 24px; border-radius: 10px; border: 1px solid var(--border); background: var(--bg-card); }
+    .who-item.not-for { border-color: rgba(255,80,80,0.2); background: rgba(255,80,80,0.04); }
+    .who-icon { flex-shrink: 0; margin-top: 2px; }
+    .who-icon svg { width: 22px; height: 22px; }
+    .who-icon.check svg { stroke: var(--gold); fill: none; stroke-width: 2.5; }
+    .who-icon.x svg { stroke: #ff6b6b; fill: none; stroke-width: 2.5; }
+    .who-text { font-size: 16px; color: var(--body); line-height: 1.6; }
+    .who-text strong { color: var(--white); font-weight: 700; }
+
+    /* ── SOCIAL PROOF ───────────────────────────────────── */
+    #proof { background: var(--bg-card); }
+    .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(280px,1fr)); gap: 20px; margin-bottom: 48px; }
+    .testimonial-card { background: linear-gradient(135deg,var(--bg-card) 0%,var(--bg-card2) 100%); border: 1px solid var(--border); border-radius: 14px; padding: 32px 28px; position: relative; overflow: hidden; }
+    .testimonial-card::before { content: '"'; position: absolute; top: 12px; left: 20px; font-size: 96px; font-weight: 900; color: rgba(255,210,77,0.12); line-height: 1; font-family: Georgia,serif; }
+    .testimonial-text { font-size: 15px; color: var(--body); line-height: 1.75; margin-bottom: 24px; position: relative; z-index: 1; }
+    .testimonial-author { font-size: 13px; font-weight: 700; color: var(--gold); }
+    .proof-closing { background: var(--bg-card); border: 1px solid var(--border); border-left: 4px solid var(--gold); border-radius: 8px; padding: 28px 32px; }
+    .proof-closing p { font-size: 16px; color: var(--body); line-height: 1.75; }
+
+    /* ── FINAL CTA ──────────────────────────────────────── */
+    #cta { text-align: center; padding: 100px 0; background: var(--bg); position: relative; }
+    #cta::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 60%,rgba(255,210,77,0.13) 0%,transparent 65%); pointer-events: none; }
+    .cta-urgency { font-size: clamp(16px,2vw,19px); color: var(--body); max-width: 680px; margin: 0 auto 40px; line-height: 1.75; }
+    .cta-urgency em { font-style: normal; color: var(--white); font-weight: 700; }
+    .cta-btn-wrap { margin-bottom: 20px; }
+    .btn-cta { display: inline-block; background: var(--gold); color: #111317; font-weight: 900; font-size: 20px; padding: 20px 52px; border-radius: 6px; border: none; cursor: pointer; transition: transform 0.15s, box-shadow 0.15s; letter-spacing: -0.01em; }
+    .btn-cta:hover { transform: translateY(-2px); box-shadow: 0 12px 48px rgba(255,210,77,0.4); }
+    .cta-note { font-size: 14px; color: var(--body); }
+
+    /* ── MODAL ──────────────────────────────────────────── */
+    .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.75); z-index: 100; align-items: center; justify-content: center; }
+    .modal-overlay.open { display: flex; }
+    .modal { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 32px 32px 24px; width: 100%; max-width: 560px; margin: 20px; }
+    .modal h3 { font-size: 24px; font-weight: 900; color: var(--white); margin-bottom: 6px; }
+    .modal p { font-size: 15px; color: var(--body); margin-bottom: 20px; }
+    .modal-close { position: absolute; top: 16px; right: 20px; background: none; border: none; color: var(--body); font-size: 24px; cursor: pointer; }
+
+    /* ── STICKY BAR ─────────────────────────────────────── */
+    .sticky-bar { position: fixed; bottom: 0; left: 0; right: 0; background: var(--bg-card); border-top: 1px solid var(--border); z-index: 90; padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; gap: 16px; transform: translateY(100%); transition: transform 0.35s ease; }
+    .sticky-bar.visible { transform: translateY(0); }
+    .sticky-bar-text { font-size: 14px; color: var(--body); font-weight: 500; }
+    .sticky-bar-text strong { color: var(--white); }
+    .btn-sticky { flex-shrink: 0; background: var(--gold); color: #111317; font-weight: 800; font-size: 14px; padding: 10px 24px; border-radius: 6px; border: none; cursor: pointer; white-space: nowrap; transition: transform 0.15s; }
+    .btn-sticky:hover { transform: translateY(-1px); }
+
+    /* ── ANIMATIONS ─────────────────────────────────────── */
+    @keyframes heroFadeUp { from { opacity:0; transform:translateY(28px); } to { opacity:1; transform:translateY(0); } }
+    .hero-animate { animation: heroFadeUp 0.6s ease both; animation-delay: 0.1s; }
+    .fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.5s ease, transform 0.5s ease; }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── RESPONSIVE ─────────────────────────────────────── */
+    @media (max-width: 720px) {
+      section { padding: 64px 0; }
+      #hero { min-height: 560px; }
+      .hero-bg-photo { left: 0; }
+      .hero-bg-photo::after { background: linear-gradient(to bottom, rgba(17,19,23,0.4) 0%, var(--bg) 75%); }
+      .hero-inner { padding: 96px 0 64px; max-width: 100%; }
+      .stat-row { grid-template-columns: 1fr; }
+      .about-video-stats { grid-template-columns: 1fr; }
+      .about-video-stat { border-right: none; border-bottom: 1px solid var(--border); }
+      .about-video-stat:last-child { border-bottom: none; }
+      .testimonials-grid { grid-template-columns: 1fr; }
+      .sticky-bar { flex-direction: column; text-align: center; padding: 12px 16px; }
+      .btn-sticky { width: 100%; }
+      #promise { min-height: auto; }
+      .promise-inner { padding: 80px 0 60px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="navbar-logo">Kasim Aslam<span>Delegation Masterclass</span></div>
+    <button class="navbar-cta" onclick="openModal()">Reserve Your Seat</button>
+  </nav>
+
+  <div class="sticky-bar" id="sticky-bar">
+    <span class="sticky-bar-text"><strong>2-hour delegation masterclass</strong> with Kasim Aslam · Free · 8PM GMT+3</span>
+    <button class="btn-sticky" onclick="openModal()">Reserve Your Seat</button>
+  </div>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-bg-photo"></div>
+    <div class="container">
+      <div class="hero-inner">
+        <div class="hero-animate">
+          <div class="badge">Live Webinar · 8PM GMT+3</div>
+          <h1 class="hero-headline">
+            <span class="hero-hl-tag">You're not too busy.</span>
+            <span class="hero-hl-mid">You're just doing everyone <span class="hl-gold">else's job.</span></span>
+          </h1>
+          <p class="hero-sub">In 2 hours, I'll show you the exact delegation system I used to build 6 businesses — and never once become the bottleneck.</p>
+          <button class="btn-primary" onclick="openModal()">Claim Your Seat Now</button>
+          <div class="hero-meta">
+            <span>Free to attend</span><span>2 hours</span><span>Live on Zoom</span>
+          </div>
+          <div class="countdown-wrap" id="countdown">
+            <div class="countdown-unit"><span class="countdown-num" id="cd-days">00</span><span class="countdown-label">Days</span></div>
+            <div class="countdown-unit"><span class="countdown-num" id="cd-hours">00</span><span class="countdown-label">Hrs</span></div>
+            <div class="countdown-unit"><span class="countdown-num" id="cd-mins">00</span><span class="countdown-label">Min</span></div>
+            <div class="countdown-unit"><span class="countdown-num" id="cd-secs">00</span><span class="countdown-label">Sec</span></div>
+          </div>
+          <p class="countdown-expired" id="countdown-expired">The webinar is live — join now!</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROBLEM -->
+  <section id="problem">
+    <div class="container">
+      <p class="pull-quote">
+        <span class="pull-quote-big">"You didn't build<br/>a business."</span>
+        <span class="pull-quote-rest">You built <span class="hl-gold">a job.</span> A worse <span class="hl-gold">job.</span> One with <span class="hl-gold">no boss,</span> <span class="hl-gold">no ceiling,</span> and <span class="hl-gold">no off switch.</span></span>
+      </p>
+      <div class="stat-row">
+        <div class="stat-card fade-up"><span class="stat-number">60</span><span class="stat-label">hour weeks</span></div>
+        <div class="stat-card fade-up"><span class="stat-number">$15/hr</span><span class="stat-label">work stealing your time</span></div>
+        <div class="stat-card fade-up"><span class="stat-number">9PM</span><span class="stat-label">when your best thinking happens</span></div>
+      </div>
+      <div class="editorial-lines">
+        <div class="editorial-line fade-up">
+          <span class="ed-tag">The problem</span>
+          <div>
+            <span class="ed-headline">You're the <span class="ed-gold">bottleneck.</span><br/><span class="ed-thin">You built it that way.</span></span>
+            <span class="ed-sub">Not because you're bad at business — because you're good at everything. And you never stopped to let go.</span>
+          </div>
+        </div>
+        <div class="editorial-line fade-up">
+          <span class="ed-tag">The lie</span>
+          <div>
+            <span class="ed-headline"><span class="ed-thin">That time</span><br/><span class="ed-gold">never came.</span></span>
+            <span class="ed-sub">"I'll delegate when things slow down." That was 18 months ago. Things did not slow down.</span>
+          </div>
+        </div>
+        <div class="editorial-line fade-up">
+          <span class="ed-tag">The cost</span>
+          <div>
+            <span class="ed-headline"><span class="ed-thin">That fear is costing you</span><br/><span class="ed-gold">millions.</span></span>
+            <span class="ed-sub">I've done the math. The real number — including your exit multiple — will make you sick.</span>
+          </div>
+        </div>
+        <div class="editorial-line ed-closing fade-up">
+          <span class="ed-tag">The fix</span>
+          <div><span class="ed-headline">In two hours,<br/>I'll show you exactly<br/>how to break it.</span></div>
+        </div>
+      </div>
+      <div class="problem-cta fade-up">
+        <button class="btn-primary" onclick="openModal()">Reserve Your Free Seat →</button>
+        <span class="problem-cta-note">Free · 2 hours · Live on Zoom · 8PM GMT+3</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROMISE — FULL SCREEN -->
+  <section id="promise">
+    <div class="container promise-inner">
+      <p class="promise-eyebrow">What you'll walk away with</p>
+      <h2 class="promise-mega fade-up">
+        Two hours from now, you'll know exactly what <em>only you</em> should be doing — and you'll never touch the rest again.
+      </h2>
+      <div class="promise-divider"></div>
+      <div class="outcomes-grid">
+        <div class="outcome-card fade-up">
+          <div class="outcome-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><line x1="21.17" y1="8" x2="11.99" y2="8"/><line x1="3.95" y1="6.06" x2="8.54" y2="14"/><line x1="10.88" y1="21.94" x2="15.46" y2="14"/></svg></div>
+          <div class="outcome-text">
+            <strong>Identify the 1% that actually requires you</strong>
+            <p>So you stop confusing "I'm good at this" with "only I can do this."</p>
+            <span class="outcome-arrow">Find the 1% that actually requires you. Protect it like your life depends on it.</span>
+            <span class="outcome-closer">Stop being the most expensive employee you've ever hired.</span>
+          </div>
+        </div>
+        <div class="outcome-card fade-up">
+          <div class="outcome-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+          <div class="outcome-text">
+            <strong>Build a system that solves problems before they reach your desk</strong>
+            <p>So problems stop landing on your desk and start getting solved by the people you're already paying to solve them.</p>
+            <span class="outcome-arrow">Build a delegation system that runs without you.</span>
+            <span class="outcome-closer">Stop being the bottleneck disguised as the boss.</span>
+          </div>
+        </div>
+        <div class="outcome-card fade-up">
+          <div class="outcome-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+          <div class="outcome-text">
+            <strong>Calculate exactly what your time is costing you</strong>
+            <p>See — with embarrassing precision — how much money you burn every hour you spend doing someone else's job.</p>
+            <span class="outcome-arrow">Rewire how you value your own time.</span>
+            <span class="outcome-closer">Most entrepreneurs are doing $15/hour work and calling it hustle.</span>
+          </div>
+        </div>
+        <div class="outcome-card fade-up">
+          <div class="outcome-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+          <div class="outcome-text">
+            <strong>Walk out with a 90-day delegation roadmap — not a feeling, a plan</strong>
+            <p>So Monday morning isn't another intention — it's the day your business starts running without you.</p>
+            <span class="outcome-arrow">A plan, not a feeling.</span>
+            <span class="outcome-closer">Because insight without execution is just an expensive podcast episode.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="container">
+      <p class="about-label">Your Host</p>
+      <h2 class="about-name">Kasim Aslam</h2>
+      <div class="video-wrap fade-up">
+        <a href="https://www.youtube.com/watch?v=qiIz0XAkfRk" target="_blank" rel="noopener noreferrer" style="display:block;position:absolute;inset:0;width:100%;height:100%;text-decoration:none;">
+          <img src="https://img.youtube.com/vi/qiIz0XAkfRk/maxresdefault.jpg" alt="Kasim Aslam — Delegation Masterclass" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.src='https://img.youtube.com/vi/qiIz0XAkfRk/hqdefault.jpg'"/>
+          <span style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
+            <span style="width:72px;height:72px;background:rgba(255,0,0,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(0,0,0,0.4);transition:transform 0.2s;">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg>
+            </span>
+          </span>
+        </a>
+      </div>
+      <div class="about-video-stats">
+        <div class="about-video-stat fade-up"><span class="about-video-stat-num">6</span><p class="about-video-stat-desc">businesses built from scratch</p></div>
+        <div class="about-video-stat fade-up"><span class="about-video-stat-num">8-fig</span><p class="about-video-stat-desc">exit</p></div>
+        <div class="about-video-stat fade-up"><span class="about-video-stat-num">15</span><p class="about-video-stat-desc">companies in his incubator</p></div>
+      </div>
+      <p class="about-bio">Kasim Aslam built 6 multi-million dollar businesses from a welfare childhood — no investors, no inheritance, no safety net — and sold one for eight figures. He's the founder of 3x Freedom, operator of a 15-company business incubator, and the person quietly behind some of the most efficient entrepreneur teams in the world. Delegation isn't a chapter in his playbook. It's how every single business got built.</p>
+      <p class="about-cta-line">If you can get two hours with him, take them.</p>
+    </div>
+  </section>
+
+  <!-- WHO IT'S FOR -->
+  <section id="who">
+    <div class="container">
+      <h2 class="section-headline">Is this for you?</h2>
+      <div class="who-grid">
+        <div class="who-item fade-up">
+          <div class="who-icon check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <p class="who-text"><strong>You're already generating revenue</strong> — but you're still the one doing, approving, and fixing everything.</p>
+        </div>
+        <div class="who-item fade-up">
+          <div class="who-icon check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <p class="who-text"><strong>You've tried delegating before, it blew up</strong> — and you quietly took everything back.</p>
+        </div>
+        <div class="who-item fade-up">
+          <div class="who-icon check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <p class="who-text"><strong>You know — genuinely know</strong> — that the way you're spending your time right now is not how your business is going to scale.</p>
+        </div>
+        <div class="who-item not-for fade-up">
+          <div class="who-icon x"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>
+          <p class="who-text"><strong>This is NOT for you</strong> if you're still looking for a business idea. Get on the field first.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOCIAL PROOF -->
+  <section id="proof">
+    <div class="container">
+      <h2 class="section-headline">The proof is in the calendar.</h2>
+      <div class="testimonials-grid">
+        <div class="testimonial-card fade-up">
+          <p class="testimonial-text">"I was doing 11 hours a week of inbox and scheduling work. After one session with Kasim, I handed it to my EA using his exact SOP. Those 11 hours are now my deep work block — and we've closed three new clients in that window alone."</p>
+          <p class="testimonial-author">— Daniel R., founder of a 9-person B2B consulting firm</p>
+        </div>
+        <div class="testimonial-card fade-up">
+          <p class="testimonial-text">"I'd tried to delegate before and it always collapsed back onto my desk. Kasim's framework made me realize I wasn't delegating projects — I was delegating tasks and staying the project manager. Revenue didn't change. My Sundays did."</p>
+          <p class="testimonial-author">— Priya M., CEO of an e-commerce brand doing $2.4M annually</p>
+        </div>
+        <div class="testimonial-card fade-up">
+          <p class="testimonial-text">"I came in skeptical. What I hadn't heard was someone explain, in arithmetic, exactly how much my time was worth at exit multiple. I did the math on the call. I was doing $11-an-hour work costing me six figures on paper. Hired an EA the following week."</p>
+          <p class="testimonial-author">— James T., solo founder scaling a SaaS tool to his first 200 customers</p>
+        </div>
+      </div>
+      <div class="proof-closing fade-up">
+        <p>Kasim has placed executive assistants inside hundreds of entrepreneur teams — with a selection process that accepts fewer than 1 in 1,000 applicants. Every business in his 15-company incubator runs without him in the day-to-day. That's not a philosophy. That's the system.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section id="cta">
+    <div class="container">
+      <p class="cta-urgency">Every week you stay the bottleneck is a week your business is worth less, your time costs more, and the gap gets harder to close. <em>That's not a scare tactic. That's arithmetic.</em></p>
+      <div class="cta-btn-wrap">
+        <button class="btn-cta" onclick="openModal()">Reserve Your Seat — 8PM GMT+3</button>
+      </div>
+      <p class="cta-note">Free to attend · 2 hours · Live on Zoom</p>
+    </div>
+  </section>
+
+  <!-- MODAL -->
+  <div class="modal-overlay" id="modal" onclick="closeModalOutside(event)">
+    <div class="modal" style="position:relative;">
+      <button class="modal-close" onclick="closeModal()">×</button>
+      <h3>Reserve Your Seat</h3>
+      <p>Free · 2 hours · Live on Zoom · 8PM GMT+3</p>
+      <iframe
+        src="https://api.leadconnectorhq.com/widget/form/bkKqalUlqG1mlRiivgjI"
+        style="width:100%;height:579px;border:none;border-radius:4px;"
+        id="inline-bkKqalUlqG1mlRiivgjI"
+        data-layout="{'id':'INLINE'}"
+        data-trigger-type="alwaysShow"
+        data-trigger-value=""
+        data-activation-type="alwaysActivated"
+        data-activation-value=""
+        data-deactivation-type="neverDeactivate"
+        data-deactivation-value=""
+        data-form-name="Axel Form"
+        data-height="579"
+        data-layout-iframe-id="inline-bkKqalUlqG1mlRiivgjI"
+        data-form-id="bkKqalUlqG1mlRiivgjI"
+        title="Axel Form"
+      ></iframe>
+      <script src="https://link.msgsndr.com/js/form_embed.js"></script>
+    </div>
+  </div>
+
+  <script>
+    function openModal() { document.getElementById('modal').classList.add('open'); }
+    function closeModal() { document.getElementById('modal').classList.remove('open'); }
+    function closeModalOutside(e) { if (e.target === document.getElementById('modal')) closeModal(); }
+
+    const WEBINAR_DATE = new Date('2026-04-09T20:00:00+03:00');
+    function pad(n) { return String(n).padStart(2,'0'); }
+    function tickCountdown() {
+      const diff = WEBINAR_DATE - Date.now();
+      if (diff <= 0) { document.getElementById('countdown').style.display='none'; document.getElementById('countdown-expired').style.display='block'; return; }
+      document.getElementById('cd-days').textContent  = pad(Math.floor(diff/86400000));
+      document.getElementById('cd-hours').textContent = pad(Math.floor((diff%86400000)/3600000));
+      document.getElementById('cd-mins').textContent  = pad(Math.floor((diff%3600000)/60000));
+      document.getElementById('cd-secs').textContent  = pad(Math.floor((diff%60000)/1000));
+    }
+    tickCountdown(); setInterval(tickCountdown,1000);
+
+    const stickyBar = document.getElementById('sticky-bar');
+    new IntersectionObserver((e) => { stickyBar.classList.toggle('visible', !e[0].isIntersecting); }, { threshold: 0.1 }).observe(document.getElementById('hero'));
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); } });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.fade-up').forEach((el,_,arr) => {
+      const siblings = Array.from(el.parentElement.querySelectorAll('.fade-up'));
+      el.style.transitionDelay = (siblings.indexOf(el) * 80) + 'ms';
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>
